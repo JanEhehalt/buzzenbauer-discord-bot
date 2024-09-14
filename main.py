@@ -89,26 +89,26 @@ async def on_ready():
     job_loop.start()
 
 async def post_war_results():
-    results = fetch_results()["items"][0]
+    results = fetch_results()['items'][0]
     message = ""
     message += f":shield::crossed_swords::shield::crossed_swords::shield:\n"
-    message += f"War against {results["opponent"]["name"]} ({results["opponent"]["tag"]}) has ended!\n"
-    if results["result"] == "win":
+    message += f"War against {results['opponent']['name']} ({results['opponent']['tag']}) has ended!\n"
+    if results['result'] == "win":
         message += "We won!\n"
-    elif results["result"] == "lose":
+    elif results['result'] == "lose":
         message += "Unfortunately we lost!\n"
-    elif results["result"] == "tie":
+    elif results['result'] == "tie":
         message += "It's a tie!\n"
     message += f"Results:\n"
-    message += f"    Attacks used: {results["clan"]["attacks"]}/{int(results["teamSize"])*2}\n"
-    message += f"    Stars: {results["clan"]["stars"]}\n"
-    message += f"    Percentage: {results["clan"]["destructionPercentage"]}\n"
+    message += f"    Attacks used: {results['clan']['attacks']}/{int(results['teamSize'])*2}\n"
+    message += f"    Stars: {results['clan']['stars']}\n"
+    message += f"    Percentage: {results['clan']['destructionPercentage']}\n"
     message += f"Opponent:\n"
-    message += f"    Stars: {results["opponent"]["stars"]}\n"
-    message += f"    Percentage: {results["opponent"]["destructionPercentage"]}\n"
+    message += f"    Stars: {results['opponent']['stars']}\n"
+    message += f"    Percentage: {results['opponent']['destructionPercentage']}\n"
     message += f"\n"
     message += f"Great job everyone!\n"
-    message += f"EXP earned: {results["clan"]["expEarned"]}\n"
+    message += f"EXP earned: {results['clan']['expEarned']}\n"
 
     channel = await client.fetch_channel(CHANNEL_ID)
     await channel.send(message)
