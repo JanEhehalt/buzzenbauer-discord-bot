@@ -8,6 +8,7 @@ from discord import *
 from time import sleep
 from discord.ext import commands, tasks
 import pytz
+from credentials import coc_name_to_discord_id
 
 headers = {"Authorization": f"Bearer {coc_api_key}"}
 
@@ -112,6 +113,9 @@ async def post_war_results():
     channel = await client.fetch_channel(CHANNEL_ID)
     await channel.send(message)
 
+
+TAG = True
+
 async def post_prep_start():
     message = ""
     message += f":shield::crossed_swords::shield::crossed_swords::shield:\n"
@@ -119,6 +123,9 @@ async def post_prep_start():
     message += f"Despite our diligent diplomatic efforts, war has been declared against {current_war_information.opponent_name}!\n"
     message += f"The military command has selected the following generals to lead the assault:\n"
     for participant in current_war_information.participants:
+        if participant in coc_name_to_discord_id and TAG:
+            message += f"    {participant} (<@{coc_name_to_discord_id[participant]}>)\n"
+            continue
         message += f"    {participant}\n"
     message += f"As is tradition, the most ferocious warriors will be rewarded with the [Berserker Role] medal!\n"
     message += f"Do not be afraid dear citizens for these veterans have proven themselves to be worthy of defending our great state and will stop the enemy's advance in their tracks!\n"
