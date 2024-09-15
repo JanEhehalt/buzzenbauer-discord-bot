@@ -1,7 +1,7 @@
 
 from datetime import datetime
 from enum import Enum
-
+import time
 
 class War_information:
     def __init__(self, opponent_name: str, start_time: str, start_time_unix: int, end_time: str, end_time_unix: int, participants: list[str]):
@@ -38,10 +38,10 @@ class War_information:
   
     
 def demo_PREP_war() -> War_information:
-    return War_information("Demo Opponent", "02. July 2027 09:46:40", 1726512834, "03. July 2027 09:46:40", 1726599234, ["Player 1", "Player 2", "Player 3"])
+    return War_information("Demo Opponent", "tomorrow", int(time.time()) + 86400, "day after tomorrow", int(time.time()) + 86400 + 86400, ["Player 1", "Player 2", "Player 3"])
 
 def demo_OVER_war() -> War_information:
-    return War_information("Demo Opponent", "28. February 2021 13:13:20", 1614514400, "29. February 2021 13:13:20", 1614600800, ["Player 1", "Player 2", "Player 3"])
+    return War_information("Demo Opponent", "day before yesterday", int(time.time()) - 86400 - 86400, "yesterday", int(time.time()) - 86400, ["Player 1", "Player 2", "Player 3"])
 
 def demo_FIGHT_war() -> War_information:
-    return War_information("Demo Opponent", "01. January 1990 01:00:00", 50000, "01. January 2110 01:00:00", 100000000000, ["Player 1", "Player 2", "Player 3"])
+    return War_information("Demo Opponent", "yesterday", int(time.time()) - 86400, "tomorrow", int(time.time()) + 86400, ["Player 1", "Player 2", "Player 3"])
