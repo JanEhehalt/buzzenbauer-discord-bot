@@ -18,7 +18,7 @@ DISCORD_BOT_TOKEN = ""
 # Fill in the Discord Channel ID you want
 # the bot to send messages to.
 # Make sure the Bot has access to the Channel
-DISCORD_CHANNEL_ID = "1284093507488841759"
+DISCORD_CHANNEL_ID = "1234..."
 
 # This is a Dictionary where you can add
 # the Discord IDs of every Clan Member
