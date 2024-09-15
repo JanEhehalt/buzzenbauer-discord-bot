@@ -21,6 +21,7 @@ class War_information:
         print("-- WAR INFORMATION --")
         print(f"Opponent: {self.opponent_name}")
         print(f"Start Time: {self.start_time}")
+        print(f"End Time: {self.end_time}")
         print(f"Participants: {self.participants}")
 
     def is_upcoming(self):
@@ -37,7 +38,7 @@ class War_information:
   
     
 def demo_PREP_war() -> War_information:
-    return War_information("Demo Opponent", "02. July 2027 09:46:40", 1814514400, "03. July 2027 09:46:40", 1814600800, ["Player 1", "Player 2", "Player 3"])
+    return War_information("Demo Opponent", "02. July 2027 09:46:40", 1726512834, "03. July 2027 09:46:40", 1726599234, ["Player 1", "Player 2", "Player 3"])
 
 def demo_OVER_war() -> War_information:
     return War_information("Demo Opponent", "28. February 2021 13:13:20", 1614514400, "29. February 2021 13:13:20", 1614600800, ["Player 1", "Player 2", "Player 3"])
