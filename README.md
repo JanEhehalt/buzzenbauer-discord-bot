@@ -1,7 +1,6 @@
 Running this Script requires you to create a file called "credentials.py".
-This is the file template. Fill in your information:
 
-credentials.py:
+This is the template for credentials.py:
 ```Python
 
 # Fill in your Clash of Clans API key here.
@@ -32,7 +31,13 @@ coc_name_to_discord_id = {
 
 ```
 
-Run the bot like this:
+Before being able to run the bot you need to install some packages:
+```Bash
+pip install -r requirements.txt
+```
+
+
+Then you can run the bot like this:
 ```Bash
 python main.py
 ```

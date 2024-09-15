@@ -1,14 +1,15 @@
 import requests
-from credentials import coc_api_key, clan_tag
 from datetime import datetime, timezone
-from war_information import War_information, demo_PREP_war, demo_FIGHT_war, demo_OVER_war
-from credentials import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID
+from time import sleep
+import pytz
 import discord
 from discord import *
-from time import sleep
 from discord.ext import commands, tasks
-import pytz
+
+from war_information import War_information, demo_PREP_war, demo_FIGHT_war, demo_OVER_war
 from credentials import coc_name_to_discord_id
+from credentials import coc_api_key, clan_tag
+from credentials import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID
 
 headers = {"Authorization": f"Bearer {coc_api_key}"}
 
