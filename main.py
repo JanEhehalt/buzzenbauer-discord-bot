@@ -10,11 +10,16 @@ from war_information import War_information, demo_PREP_war, demo_FIGHT_war, demo
 from credentials import coc_name_to_discord_id
 from credentials import coc_api_key, clan_tag
 from credentials import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID
+from credentials import DISCORD_GUILD_ROSTER_CHANNEL_ID
 
+# use this for restarting the prod Bot
+SKIP_FIRST_MESSAGE = True
 TAG_WAR_PARTICIPANTS = True
 CREATE_EVENT = True
 BOT_TOKEN = DISCORD_BOT_TOKEN
 CHANNEL_ID = DISCORD_CHANNEL_ID
+
+
 
 current_war_information = None
 
@@ -57,6 +62,9 @@ def fetch_results():
     return requests.get(warlog, headers=headers).json()
 
 async def post_war_results(results):
+    if SKIP_FIRST_MESSAGE:
+        SKIP_FIRST_MESSAGE = False
+        return
     message = ""
     message += f":shield::crossed_swords::shield::crossed_swords::shield:\n"
     message += f"War against {results['opponent']['name']} ({results['opponent']['tag']}) has ended!\n"
@@ -81,6 +89,9 @@ async def post_war_results(results):
     await channel.send(message)
 
 async def post_prep_start(war_information: War_information):
+    if SKIP_FIRST_MESSAGE:
+        SKIP_FIRST_MESSAGE = False
+        return
     channel = await client.fetch_channel(CHANNEL_ID)
 
     message = ""
@@ -115,6 +126,9 @@ async def post_prep_start(war_information: War_information):
     await channel.send(message)
 
 async def post_fight_start(war_information: War_information):
+    if SKIP_FIRST_MESSAGE:
+        SKIP_FIRST_MESSAGE = False
+        return
     message = ""
     message += f":shield::crossed_swords::shield::crossed_swords::shield:\n"
     message += f"Attention honorable citizens!\n"
@@ -170,6 +184,81 @@ async def on_ready():
 async def job_loop():
     await run()
     print("sleep")
+
+
+guild_roster_message = None
+current_leader = ""
+current_co_leaders = []
+current_elders = []
+current_members = []
+
+async def update_guild_roster():
+    global guild_roster_message, current_leaders, current_co_leaders, current_elders, current_members
+
+    headers = {"Authorization": f"Bearer {coc_api_key}"}
+    currentwar = f"https://api.clashofclans.com/v1/clans/{clan_tag}"
+    data = requests.get(currentwar, headers=headers).json().get("memberList")
+
+    update_necessary = False
+
+    new_leader = ""
+    for member in data:
+        if member.get("role") == "leader":
+            new_leader = member.get("name")
+            break
+    
+    new_co_leaders = []
+    for member in data:
+        if member.get("role") == "coLeader":
+            new_co_leaders.append(member.get("name"))
+
+    new_elders = []
+    for member in data:
+        if member.get("role") == "admin" or member.get("role") == "elder":
+            new_elders.append(member.get("name"))
+
+    new_members = []
+    for member in data:
+        if member.get("role") == "member":
+            new_members.append(member.get("name"))
+
+    if  new_leader != current_leader or set(new_members) != set(current_members) or set(new_co_leaders) != set(current_co_leaders) or set(new_elders) != set(current_elders):
+        update_necessary = True
+        current_leader = new_leader
+        current_co_leaders = new_co_leaders
+        current_elders = new_elders
+        current_members = new_members
+
+
+    if update_necessary:
+        message = ""
+        message += f"Our Leader:\n"
+        message += f"    {data.get('leader')}\n"
+        message += f"\n"
+        message += f"Our Co-Leaders:\n"
+        for co_leader in current_co_leaders:
+            message += f"    {co_leader}\n"
+        message += f"\n"
+        message += f"Our Elders:\n"
+        for elder in current_elders:
+            message += f"    {elder}\n"
+        message += f"\n"
+        message += f"Our Members:\n"
+        for member in current_members:
+            message += f"    {member}\n"
+        message += f"\n"
+
+        if not guild_roster_message:
+            channel = await client.fetch_channel(DISCORD_GUILD_ROSTER_CHANNEL_ID)
+            guild_roster_message = await channel.send(message)
+        else:
+            await guild_roster_message.edit(content=message)
+
+
+@tasks.loop(seconds=300)
+async def job_loop():
+    print("updating guild roster")
+    await update_guild_roster()
 
 
 client.run(BOT_TOKEN)
