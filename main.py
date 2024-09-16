@@ -233,7 +233,7 @@ async def update_guild_roster():
     if update_necessary:
         message = ""
         message += f"Our Leader:\n"
-        message += f"    {data.get('leader')}\n"
+        message += f"    {current_leader}\n"
         message += f"\n"
         message += f"Our Co-Leaders:\n"
         for co_leader in current_co_leaders:
