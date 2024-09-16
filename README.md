@@ -20,6 +20,19 @@ DISCORD_BOT_TOKEN = ""
 # Make sure the Bot has access to the Channel
 DISCORD_CHANNEL_ID = "1234..."
 
+# Fill in the Discord Channel ID you want
+# the bot to send your Clan Roster to.
+# Make sure the Bot has access to the Channel
+DISCORD_GUILD_ROSTER_CHANNEL_ID = "1234..."
+
+# The ID of the Role the CW-MVP gets
+DISCORD_WAR_REWARD_ROLE_ID = "1234..."
+
+# Custom Emoji formatted (e.g. Clan Banner Shield)
+# To find out send any emoji in Discord with an "\" before
+# like this: \:emoji: 
+CUSTOM_EMOJI = "<:NAME:ID>"
+
 # This is a Dictionary where you can add
 # the Discord IDs of every Clan Member
 # This will allow the Bot to tag them 

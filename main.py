@@ -11,6 +11,8 @@ from credentials import coc_name_to_discord_id
 from credentials import coc_api_key, clan_tag
 from credentials import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID
 from credentials import DISCORD_GUILD_ROSTER_CHANNEL_ID, DISCORD_WAR_REWARD_ROLE_ID
+from credentials import CUSTOM_EMOJI
+
 
 # use this for restarting the prod Bot
 SKIP_FIRST_MESSAGE = True
@@ -19,7 +21,6 @@ CREATE_EVENT = True
 BOT_TOKEN = DISCORD_BOT_TOKEN
 CHANNEL_ID = DISCORD_CHANNEL_ID
 WAR_REWARD_ROLE_ID = DISCORD_WAR_REWARD_ROLE_ID
-
 
 
 current_war_information = None
@@ -67,7 +68,7 @@ async def post_war_results(results):
         SKIP_FIRST_MESSAGE = False
         return
     message = ""
-    message += f":shield::crossed_swords::shield::crossed_swords::shield:\n"
+    message += f"{CUSTOM_EMOJI}:crossed_swords:{CUSTOM_EMOJI}:crossed_swords:{CUSTOM_EMOJI}\n"
     message += f"War against {results['opponent']['name']} ({results['opponent']['tag']}) has ended!\n"
     if results['result'] == "win":
         message += "We won!\n"
@@ -96,7 +97,7 @@ async def post_prep_start(war_information: War_information):
     channel = await client.fetch_channel(CHANNEL_ID)
 
     message = ""
-    message += f":shield::crossed_swords::shield::crossed_swords::shield:\n"
+    message += f"{CUSTOM_EMOJI}:crossed_swords:{CUSTOM_EMOJI}:crossed_swords:{CUSTOM_EMOJI}\n"
     message += f"Attention honorable citizens!\n"
     message += f"Despite our diligent diplomatic efforts, war has been declared against {war_information.opponent_name}!\n"
     message += f"The military command has selected the following generals to lead the assault:\n"
@@ -131,7 +132,7 @@ async def post_fight_start(war_information: War_information):
         SKIP_FIRST_MESSAGE = False
         return
     message = ""
-    message += f":shield::crossed_swords::shield::crossed_swords::shield:\n"
+    message += f"{CUSTOM_EMOJI}:crossed_swords:{CUSTOM_EMOJI}:crossed_swords:{CUSTOM_EMOJI}\n"
     message += f"Attention honorable citizens!\n"
     message += f"The war day against {war_information.opponent_name} has begun!\n"
     message += f"May the gods of war be with us!\n"
