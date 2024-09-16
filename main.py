@@ -15,7 +15,7 @@ from credentials import CUSTOM_EMOJI
 
 
 # use this for restarting the prod Bot
-SKIP_FIRST_MESSAGE = True
+SKIP_FIRST_MESSAGE = False
 TAG_WAR_PARTICIPANTS = True
 CREATE_EVENT = True
 BOT_TOKEN = DISCORD_BOT_TOKEN
@@ -64,6 +64,7 @@ def fetch_results():
     return requests.get(warlog, headers=headers).json()
 
 async def post_war_results(results):
+    global SKIP_FIRST_MESSAGE
     if SKIP_FIRST_MESSAGE:
         SKIP_FIRST_MESSAGE = False
         return
@@ -91,6 +92,7 @@ async def post_war_results(results):
     await channel.send(message)
 
 async def post_prep_start(war_information: War_information):
+    global SKIP_FIRST_MESSAGE
     if SKIP_FIRST_MESSAGE:
         SKIP_FIRST_MESSAGE = False
         return
@@ -128,6 +130,7 @@ async def post_prep_start(war_information: War_information):
     await channel.send(message)
 
 async def post_fight_start(war_information: War_information):
+    global SKIP_FIRST_MESSAGE
     if SKIP_FIRST_MESSAGE:
         SKIP_FIRST_MESSAGE = False
         return
