@@ -236,21 +236,21 @@ async def update_guild_roster():
         counter = 1
         message =  f"⚔️This is our current roster:⚔️\n"
         message += f"\n"
-        message += f"🛡️Our Leader:🛡️\n"
+        message += f"{CUSTOM_EMOJI}Our Leader:{CUSTOM_EMOJI}\n"
         message += f"{counter}. {current_leader}\n"
         counter += 1
         message += f"\n"
-        message += f"🛡️Our Co-Leaders:🛡️\n"
+        message += f"{CUSTOM_EMOJI}Our Co-Leaders:{CUSTOM_EMOJI}\n"
         for co_leader in current_co_leaders:
             message += f"{counter}. {co_leader}\n"
             counter += 1
         message += f"\n"
-        message += f"🛡️Our Elders:🛡️\n"
+        message += f"{CUSTOM_EMOJI}Our Elders:{CUSTOM_EMOJI}\n"
         for elder in current_elders:
             message += f"{counter}. {elder}\n"
             counter += 1
         message += f"\n"
-        message += f"🛡️Our Members:🛡️\n"
+        message += f"{CUSTOM_EMOJI}Our Members:{CUSTOM_EMOJI}\n"
         for member in current_members:
             message += f"{counter}. {member}\n"
             counter += 1
