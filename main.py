@@ -185,6 +185,7 @@ async def on_ready():
 @tasks.loop(seconds=60)
 async def job_loop():
     await run()
+    await update_guild_roster()
     print("sleep")
 
 
@@ -261,12 +262,6 @@ async def update_guild_roster():
             guild_roster_message = await channel.send(message)
         else:
             await guild_roster_message.edit(content=message)
-
-
-@tasks.loop(seconds=300)
-async def job_loop():
-    print("updating guild roster")
-    await update_guild_roster()
 
 
 client.run(BOT_TOKEN)
