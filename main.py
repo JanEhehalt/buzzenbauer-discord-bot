@@ -193,7 +193,7 @@ current_elders = []
 current_members = []
 
 async def update_guild_roster():
-    global guild_roster_message, current_leaders, current_co_leaders, current_elders, current_members
+    global guild_roster_message, current_leader, current_co_leaders, current_elders, current_members
 
     headers = {"Authorization": f"Bearer {coc_api_key}"}
     currentwar = f"https://api.clashofclans.com/v1/clans/{clan_tag}"
