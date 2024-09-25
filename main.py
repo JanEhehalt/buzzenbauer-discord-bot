@@ -108,7 +108,7 @@ async def post_prep_start(war_information: War_information):
             message += f"    {participant} (<@{coc_name_to_discord_id[participant]}>)\n"
             continue
         message += f"    {participant}\n"
-    message += f"As is tradition, the most ferocious warriors will be rewarded with the <@{WAR_REWARD_ROLE_ID}> medal!\n"
+    message += f"As is tradition, the most ferocious warriors will be rewarded with the <@&{WAR_REWARD_ROLE_ID}> medal!\n"
     message += f"Do not be afraid dear citizens for these veterans have proven themselves to be worthy of defending our great state and will stop the enemy's advance in their tracks!\n"
     message += f"The war will commence on {war_information.start_time} (CET)!\n"
 
